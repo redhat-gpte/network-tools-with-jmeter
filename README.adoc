@@ -2,6 +2,14 @@
 
 ## Usage
 
+To deploy network tools with jmeter:
+
 ----------
 helm template helm/ | oc apply -f -
+----------
+
+Then to access the shell:
+
+----------
+oc rsh deployment/network-tools-with-jmeter
 ----------
