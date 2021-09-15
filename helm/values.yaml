@@ -1,0 +1,25 @@
+deploy: true
+replicaCount: 1
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+resources:
+  limits:
+    cpu: "1"
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 512Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+image:
+  repository: quay.io/redhat-gpte/network-tools-with-jmeter
+  pullPolicy: Always
+  tagOverride: ""
