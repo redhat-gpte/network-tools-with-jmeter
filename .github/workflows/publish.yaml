@@ -57,7 +57,7 @@ jobs:
       if: steps.image_tags.outputs.IMAGE_TAGS
       with:
         registry: registry.redhat.io
-        username: ${{ secrets.REGISTRY_REDHAT_IO_USERNAME
+        username: ${{ secrets.REGISTRY_REDHAT_IO_USERNAME }}
         password: ${{ secrets.REGISTRY_REDHAT_IO_PASSWORD }}
 
     - name: Login to Image Registry
