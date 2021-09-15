@@ -19,14 +19,14 @@ spec:
     spec:
       containers:
       - name: shell
+        command:
+        - /bin/sh
+        - -c
+        - while true; do sleep 10; done
         image: {{ include "network-tools-with-jmeter.image" . | quote }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         resources:
           {{- toYaml .Values.resources | nindent 12 }}
-        volumeMounts:
-        - name: smtp-tls
-          mountPath: /smtp-tls
-          readOnly: true
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
