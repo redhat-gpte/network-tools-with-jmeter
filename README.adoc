@@ -2,14 +2,38 @@
 
 ## Usage
 
-To deploy network tools with jmeter:
+Select project in which to run JMeter container.
 
-----------
-helm template helm/ | oc apply -f -
-----------
+--------------------------------
+oc project user-name-example-com
+--------------------------------
 
-Then to access the shell:
+Deploy from OpenShift template.
 
-----------
+----------------------------------
+oc new-app -f deploy-template.yaml
+----------------------------------
+
+Get pod name for JMeter.
+
+-----------------
+JMETER_POD="$(oc get pod -l name=network-tools-with-jmeter -o jsonpath='{.items[0].metadata.name}')"
+-----------------
+
+Access shell in JMeter container.
+
+----------------
 oc rsh deployment/network-tools-with-jmeter
-----------
+----------------
+
+Copy files to JMeter container.
+
+-----------------
+oc cp <SOURCE> $JMETER_POD:<DEST>
+-----------------
+
+Copy files from JMeter container.
+
+-----------------
+oc cp $JMETER_POD:<SOURCE> <DEST>
+-----------------

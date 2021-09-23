@@ -1,0 +1,56 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  annotations:
+    description: network-tools-with-jmeter deployment
+  name: network-tools-with-jmeter-deploy
+
+parameters:
+- name: NAME
+  value: network-tools-with-jmeter
+- name: IMAGE
+  value: quay.io/redhat-gpte/network-tools-with-jmeter:v0.1.2
+- name: IMAGE_PULL_POLICY
+  value: Always
+- name: CPU_LIMIT
+  value: "2"
+- name: CPU_REQUEST
+  value: 500m
+- name: MEMORY_LIMIT
+  value: 2Gi
+- name: MEMORY_REQUEST
+  value: 1Gi
+
+objects:
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: ${NAME}
+  spec:
+    replicas: 1
+    selector:
+      matchLabels:
+        name: network-tools-with-jmeter
+    strategy:
+      type: Recreate
+    template:
+      metadata:
+        labels:
+          name: network-tools-with-jmeter
+      spec:
+        containers:
+        - name: shell
+          command:
+          - /bin/sh
+          - -c
+          - while true; do sleep 10; done
+          image: ${IMAGE}
+          imagePullPolicy: ${IMAGE_PULL_POLICY}
+          resources:
+            limits:
+              cpu: ${CPU_LIMIT}
+              memory: ${MEMORY_LIMIT}
+            requests:
+              cpu: ${CPU_REQUEST}
+              memory: ${MEMORY_REQUEST}
+      restartPolicy: Always

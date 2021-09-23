@@ -4,7 +4,7 @@ kind: Template
 metadata:
   annotations:
     description: network-tools-with-jmeter build
-  name: network-tools-with-jmeter
+  name: network-tools-with-jmeter-build
 
 parameters:
 - name: NAME
